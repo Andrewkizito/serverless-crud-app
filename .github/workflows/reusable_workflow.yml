@@ -19,7 +19,7 @@ jobs:
     outputs:
       infrastructure_changed: ${{ steps.check_files_changed.outputs.infrastructure_changed }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           # Checkout as many commits as needed for the diff
           fetch-depth: 2
