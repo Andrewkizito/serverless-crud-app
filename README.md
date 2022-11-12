@@ -70,7 +70,7 @@ In the src/ folder are the different services that make up of application, which
 
 **Database**: This consists of a dynamodb table that has a partition key of **PK** and sort key of **SK**. **_PK_** - is mainly used to store closely related data is the same node which improved performance and in our case the **PK** is **PROJECTS**. **_SK_** - is an id that is generated using KUIDs consisting of the curerent timestamp and this is used for sorting purposes.
 
-**IAM Roles**: This consists of a read-role that allows reads on dynamodb (getItem and query), a write-role that allows for writes on dynamodb (putItem and updateItem) abd finally a delete-role for deletes
+**IAM Roles**: This consists of a read-role that allows reads on dynamodb (getItem and query), a write-role that allows for writes on dynamodb (putItem and updateItem) and finally a delete-role for deletes
 
 **Functions**: Holds all the functions with their repective API-endpoints hence deploying a Rest API in the process, code used to deploy lambda layers and finally models which validate requests as they pass through API Gateway.
 
