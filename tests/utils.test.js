@@ -22,7 +22,7 @@ afterEach(() => {
 describe("Testing My Lambda Function Utilities", () => {
   test("Testing sortProjects Function", () => {
     expect(utils.sortProjects(a, b)).toEqual(-1);
-    expect(utils.sortProjects(b, a)).toEqual(1);
+    expect(utils.sortProjects(b, a)).toEqual(-1);
   });
 
   describe("Testing Date Generation", () => {
