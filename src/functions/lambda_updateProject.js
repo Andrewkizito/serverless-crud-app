@@ -10,7 +10,6 @@ const generateExpression = (payload) => {
   if (payload.project_owner) update_expression += "project_owner = :owner,";
   //Closing the expression
   update_expression += "last_update = :lu";
-  console.log(update_expression);
   return update_expression;
 };
 
@@ -24,7 +23,6 @@ const generateValues = (payload) => {
   if (payload.description) values[":desc"] = payload.description;
   if (payload.progress) values[":prog"] = payload.progress;
   if (payload.project_owner) values[":owner"] = payload.project_owner;
-  console.log(values);
   return values;
 };
 
