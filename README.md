@@ -29,34 +29,34 @@ This application has 2 branchs; dev and prod. The prod branch is protected and y
 ```bash
 
 ├── .github
-│   └── workflows
-│       ├── deploy-dev.yml
-│       ├── deploy-prod.yml
-│       ├── intergrate.yml
-│       └── main-workflow.yml
-├── src
-│   ├── database
-│   │   └── serverless.yml
-│   ├── functions
-│   │   ├── lambda_deleteProject.js
-│   │   ├── lambda_getProjects.js
-│   │   ├── layers
-│   │   │   └── utils
-│   │   │       └── nodejs
-│   │   │           ├── package.json
-│   │   │           ├── utils.js
-│   │   │           └── package-lock.json
-│   │   ├── models
-│   │   │   ├── update.json
-│   │   │   └── project.json
-│   │   ├── lambda_updateProject.js
-│   │   ├── lambda_addProject.js
-│   │   ├── lambda_getProject.js
-│   │   └── serverless.yml
-│   └── roles
-│       └── serverless.yml
-├── tests
-│   └── utils.test.js
+|    └── workflows
+|        ├── prod-workflow.yml
+|        ├── dev-workflow.yml
+|        └── reusable_workflow.yml
+└── src
+    ├── database
+    │   └── serverless.yml
+    ├── functions
+    │   ├── lambda_addProject.js
+    │   ├── lambda_deleteProject.js
+    │   ├── lambda_getProject.js
+    │   ├── lambda_getProjects.js
+    │   ├── lambda_updateProject.js
+    │   ├── layers
+    │   │   └── utils
+    │   │       └── nodejs
+    │   │           ├── package.json
+    │   │           ├── package-lock.json
+    │   │           └── utils.js
+    │   ├── models
+    │   │   ├── project.json
+    │   │   └── update.json
+    │   └── serverless.yml
+    ├── roles
+    │   └── serverless.yml
+    ├── dummy-data.json
+    └── tests
+        └── utils.test.js
 ├── serverless-compose.yml
 ├── package.json
 ├── package-lock.json
