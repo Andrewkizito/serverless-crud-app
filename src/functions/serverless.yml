@@ -1,0 +1,125 @@
+service: projects-functions
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  deploymentMethod: direct
+  runtime: nodejs16.x
+  memorySize: 128
+  timeout: 10
+  tracing:
+    lambda: true
+    apiGateway: true
+  environment:
+    TABLE_NAME: ${param:TableName}
+    
+
+package:
+  individually: true
+  patterns:
+    - "!layers"
+    - "!lambda*"
+    - "!models"
+
+layers:
+  Utils:
+    path: layers/utils
+    description: Adds a few utility functions
+    compatibleRuntimes:
+      - nodejs14.x
+      - nodejs16.x
+    retain: false
+
+functions:
+  ## Defining functions
+  AddProject:
+    handler: lambda_addProject.handler
+    name: serverless_addProject
+    description: Add new projects to database
+    role: ${param:DBWriteRole}
+    package:
+      patterns:
+        - "lambda_addProject.js"
+    layers:
+      - !Ref UtilsLambdaLayer
+    events:
+      - http:
+          path: /projects
+          method: post
+          cors: true
+          request:
+            schemas:
+              application/json:
+                schema: ${file(models/project.json)}
+                name: ProjectModel
+                description: "Validation model for Creating Projects"
+
+  GetProjects:
+    handler: lambda_getProjects.handler
+    name: serverless_getProjects
+    description: Query for all projects from database
+    role: ${param:DBReadRole}
+    package:
+      patterns:
+        - "lambda_getProjects.js"
+    layers:
+      - !Ref UtilsLambdaLayer
+    events:
+      - http:
+          path: /projects
+          method: get
+          cors: true
+
+  GetProject:
+    handler: lambda_getProject.handler
+    name: serverless_getProject
+    description: Query for all projects from database
+    role: ${param:DBReadRole}
+    package:
+      patterns:
+        - "lambda_getProject.js"
+    layers:
+      - !Ref UtilsLambdaLayer
+    events:
+      - http:
+          path: /projects/{id}
+          method: get
+          cors: true
+
+  UpdateProject:
+    handler: lambda_updateProject.handler
+    name: serverless_updateProject
+    description: Update a single project
+    role: ${param:DBWriteRole}
+    package:
+      patterns:
+        - "lambda_updateProject.js"
+    layers:
+      - !Ref UtilsLambdaLayer
+    events:
+      - http:
+          path: /projects
+          method: patch
+          cors: true
+          request:
+            schemas:
+              application/json:
+                schema: ${file(models/update.json)}
+                name: UpdateModel
+                description: "Validation model for Updating Projects"
+
+  DeleteProject:
+    handler: lambda_deleteProject.handler
+    name: serverless_deleteProject
+    description: Delete a single project
+    role: ${param:DBDeleteRole}
+    package:
+      patterns:
+        - "lambda_deleteProject.js"
+    layers:
+      - !Ref UtilsLambdaLayer
+    events:
+      - http:
+          path: /projects/{id}
+          method: delete
+          cors: true
