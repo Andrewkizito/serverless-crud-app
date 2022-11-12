@@ -35,7 +35,7 @@ jobs:
           Write-Host "::set-output name=infrastructure_changed::$HasDiff"
 
   Test:
-    needs: [Test]
+    needs: [Check_Changed_Files]
     if: needs.Check_Changed_Files.outputs.infrastructure_changed == 'True'
     runs-on: ubuntu-latest
     strategy:
