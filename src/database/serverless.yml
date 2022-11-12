@@ -1,0 +1,31 @@
+service: projects-database
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  deploymentMethod: direct
+
+resources:
+  Resources:
+    ## Dynamodb Table
+    Database:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Projects-Manager
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
+            AttributeType: S
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+
+  Outputs:
+    TableArn:
+      Value: !GetAtt Database.Arn
+    TableName:
+      Value: !Ref Database
