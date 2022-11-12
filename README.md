@@ -26,6 +26,7 @@ Test - This runs all the tests that a required inorder to make sure we deploy er
 This application has 2 branchs; dev and prod. The prod branch is protected and you can only write to it via pull requests.
 
 ## Project structure
+
 ```bash
 
 ├── .github
@@ -126,46 +127,43 @@ There are 5 available endpoints on the API.
 - Delete - /projects/{id} - Deletes a project from the database, **id(SK)** must be included.
 
 ## Deployment Workflow
+
 All files related to deployment are found in the .github/ path.
 We have two stages in this application i.e **dev** and **prod**, each stage is configured to utilize a separate account as best practice and this has been achieved by making use of secrets stored securely in the repository secrets section to avoid credential leakage into the public.
 
 #### Secrets Include
+
 Prod credentials
+
 - PROD_ACCESS_KEY_ID
 - PROD_SECRET_ACCESS_KEY
 
 Dev credentials
+
 - DEV_ACCESS_KEY_ID
 - DEV_SECRET_ACCESS_KEY
 
-
-We have two branches; **dev** and **prod**. These also represent the development stages that we have in our application repectively(dev and prod). 
+We have two branches; **dev** and **prod**. These also represent the development stages that we have in our application repectively(dev and prod).
 
 ## Working with dev stage
-When code is commited to dev, it triggers a workflow which tests our code before deploying it to the dev account utilizing the credentials in the secrets. 
+
+When code is commited to dev, it triggers a workflow which tests our code before deploying it to the dev account utilizing the credentials in the secrets.
 ![](images/dev-pipeline.png)
 
 ![](images/dev-deployment.png)
 
 ## Working with prod stage
-Inorder to deploy resources to the prod stage(which is in a different account), you need to first open a pull request inorder to merge changes from the dev branch since we have branch protection rules which restrict us from directly commiting to the branch. 
 
-After opening a pull-request, we have a workflow in place which tests the code before attempting to deploy it.
+Inorder to deploy resources to the prod stage(which is in a different account), you need to first open a pull request inorder to merge changes from the dev branch since we have branch protection rules which restrict us from directly commiting to the branch.
+
+After opening a pull-request, we have a workflow in place which checks whether the latest deployment in the prod branch happened successfully
 ![](images/pull-request.png)
 
-
-If this test passes, then another collaborator is required to approve the changes before merging the changes. 
-![](images/approve.png) 
+If this test passes, then another collaborator is required to approve the changes before merging the changes.
+![](images/approve.png)
 
 After the review is complete then we can go ahead and merge the changes.
-![](images/merge.png) 
+![](images/merge.png)
 
 Then this will kickstart the deployment pipeline that pushes everything to the production account.
-![](images/prod-pipeline.png) 
-
-
-
-
-
-
-
+![](images/prod-pipeline.png)

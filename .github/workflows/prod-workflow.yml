@@ -1,4 +1,4 @@
-name: Prod Deployment
+name: Production Deployment
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - prod
 
 jobs:
-  Deploy:
+  Production-Deployment:
     uses: ./.github/workflows/reusable_workflow.yml
     with:
       stage: prod
