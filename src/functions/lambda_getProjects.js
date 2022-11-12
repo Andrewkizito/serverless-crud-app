@@ -15,7 +15,7 @@ exports.handler = async (event) => {
           ":PK": "PROJECTS",
         },
         ProjectionExpression:
-          "title, description, created_at, social_image ,SK",
+          "title, description, created_at ,SK",
       })
       .promise();
     const response = [...Items].sort((a, b) => sortProjects(a, b));
