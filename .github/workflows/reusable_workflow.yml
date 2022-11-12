@@ -13,8 +13,30 @@ on:
         required: true
 
 jobs:
-  test:
-    name: Test ${{ inputs.stage }} stage
+  Check_Changed_Files:
+    runs-on: "ubuntu-20.04"
+    # Declare outputs for next jobs
+    outputs:
+      infrastructure_changed: ${{ steps.check_files_changed.outputs.infrastructure_changed }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # Checkout as many commits as needed for the diff
+          fetch-depth: 2
+      - shell: pwsh
+        id: check_files_changed
+        run: |
+          # Diff HEAD with the previous commit
+          $diff = git diff --name-only HEAD^ HEAD
+
+          $SourceDiff = $diff | Where-Object { $_ -match '^src/' -or $_ -match '.js$' -or $_ -match '.yml$' }
+          $HasDiff = $SourceDiff.Length -gt 0
+
+          Write-Host "::set-output name=infrastructure_changed::$HasDiff"
+
+  Test:
+    needs: [Test]
+    if: needs.Check_Changed_Files.outputs.infrastructure_changed == 'True'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -28,9 +50,9 @@ jobs:
       - run: npm run setup
       - run: npm run test
 
-  deploy:
-    needs: test
-    name: Deploy to ${{ inputs.stage }}
+  Deploy:
+    needs: [Test, Check_Changed_Files]
+    if: needs.Check_Changed_Files.outputs.infrastructure_changed == 'True'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -43,7 +65,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm run setup
       - run: npm run test
-      - name: deploy
+      - name: Deploy Stage
         uses: serverless/github-action@v3.1
         with:
           args: deploy --stage ${{ inputs.stage }}
