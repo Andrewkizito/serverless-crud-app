@@ -52,7 +52,7 @@ jobs:
       - run: npm run test
 
   Deploy:
-    name: Deloyming to ${{ inputs.stage }}
+    name: Deploying to ${{ inputs.stage }}
     needs: [Test, Check_Changed_Files]
     if: needs.Check_Changed_Files.outputs.infrastructure_changed == 'True'
     runs-on: ubuntu-latest
