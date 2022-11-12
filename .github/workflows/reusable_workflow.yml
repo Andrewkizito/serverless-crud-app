@@ -32,8 +32,7 @@ jobs:
           $SourceDiff = $diff | Where-Object { $_ -match '^src/' -or $_ -match '.js$' -or $_ -match '.yml$' }
           $HasDiff = $SourceDiff.Length -gt 0
 
-          # Write-Host "::set-output name=infrastructure_changed::$HasDiff"
-          Write-Host "{infrastructure_changed}={$HasDiff}" >> $GITHUB_OUTPUT
+          Write-Host "::set-output name=infrastructure_changed::$HasDiff"
   Test:
     needs: [Check_Changed_Files]
     if: needs.Check_Changed_Files.outputs.infrastructure_changed == 'True'
