@@ -9,7 +9,7 @@ jobs:
   Test:
     uses: ./.github/workflows/reusable_test.yml
     with:
-      stage: prod
+      stage: dev
   Deploy:
     needs: Test
     uses: ./.github/workflows/reusable_workflow.yml
