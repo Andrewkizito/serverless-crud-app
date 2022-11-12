@@ -6,10 +6,6 @@ on:
       - prod
 
 jobs:
-  Test:
-    uses: ./.github/workflows/reusable_test.yml
-    with:
-      stage: prod
   Deploy:
     uses: ./.github/workflows/reusable_workflow.yml
     with:
