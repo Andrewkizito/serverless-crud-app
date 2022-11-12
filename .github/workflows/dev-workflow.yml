@@ -6,7 +6,7 @@ on:
       - dev
 
 jobs:
-  Deploy:
+  Dev-Deployment:
     uses: ./.github/workflows/reusable_workflow.yml
     with:
       stage: dev

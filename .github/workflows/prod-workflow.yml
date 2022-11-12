@@ -6,7 +6,7 @@ on:
       - prod
 
 jobs:
-  Deploy:
+  Production-Deployment:
     uses: ./.github/workflows/reusable_workflow.yml
     with:
       stage: prod
