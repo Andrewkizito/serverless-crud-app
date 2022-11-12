@@ -1,0 +1,26 @@
+[
+  {
+    "title": "CI/CD Pipeline",
+    "description": "This is just a simple CI/CD Pipeline",
+    "project_owner": "Andrew Kizito",
+    "progress": "90%"
+  },
+  {
+    "title": "Web Project",
+    "description": "This is a complicated web-project",
+    "project_owner": "John DOe",
+    "progress": "60%"
+  },
+  {
+    "title": "Disaster Recovery",
+    "description": "This s distater recovery strategy",
+    "project_owner": "John Doe",
+    "progress": "90%"
+  },
+  {
+    "title": "Mobile Project",
+    "description": "This is a complicated mobile-app",
+    "project_owner": "Dean Smith",
+    "progress": "90%"
+  }
+]
