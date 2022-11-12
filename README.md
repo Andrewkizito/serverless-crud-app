@@ -156,7 +156,7 @@ When code is commited to dev, it triggers a workflow which tests our code before
 
 Inorder to deploy resources to the prod stage(which is in a different account), you need to first open a pull request inorder to merge changes from the dev branch since we have branch protection rules which restrict us from directly commiting to the branch.
 
-After opening a pull-request, we have a workflow in place which checks whether the latest deployment in the prod branch happened successfully
+After opening a pull-request,the workflow in place checks whether the latest deployment in the dev branch happened successfully
 ![](images/pull-request.png)
 
 If this test passes, then another collaborator is required to approve the changes before merging the changes.
