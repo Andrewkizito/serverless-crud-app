@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Project Schema",
+  "type": "object",
+  "required": ["id"],
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "description": { "type": "string" },
+    "progress": {
+      "type": "string",
+      "pattern": "[0-9]%|[0-9][0-9]%|100%"
+    },
+    "project_owner": { "type": "string" }
+  }
+}
