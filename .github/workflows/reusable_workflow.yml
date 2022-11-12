@@ -1,4 +1,4 @@
-name: Deployment pipeline
+name: Reusable Deployment Workflow
 
 on:
   workflow_call:
