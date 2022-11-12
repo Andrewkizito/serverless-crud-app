@@ -1,4 +1,4 @@
-name: Deploy
+name: Deployment pipeline
 
 on:
   workflow_call:
