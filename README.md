@@ -167,3 +167,17 @@ After the review is complete then we can go ahead and merge the changes.
 
 Then this will kickstart the deployment pipeline that pushes everything to the production account.
 ![](images/prod-pipeline.png)
+
+#### Rest API Urls
+
+Dev Stage
+
+```
+https://q6jhd56tzd.execute-api.us-east-1.amazonaws.com/dev/projects
+```
+
+Prod Stage
+
+```
+https://7gv0fue795.execute-api.us-east-1.amazonaws.com/prod/projects
+```
