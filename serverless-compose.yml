@@ -1,0 +1,21 @@
+services:
+  database:
+    path: src/database
+
+  iam-roles:
+    path: src/roles
+    dependsOn:
+      - database
+    params:
+      TableArn: ${database.TableArn}
+
+  functions:
+    path: src/functions
+    dependsOn:
+      - database
+      - iam-roles
+    params:
+      TableName: ${database.TableName}
+      DBReadRole: ${iam-roles.DBReadRole}
+      DBWriteRole: ${iam-roles.DBWriteRole}
+      DBDeleteRole: ${iam-roles.DBDeleteRole}
