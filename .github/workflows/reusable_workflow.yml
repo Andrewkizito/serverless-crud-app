@@ -33,7 +33,7 @@ jobs:
           $HasDiff = $SourceDiff.Length -gt 0
 
           # Write-Host "::set-output name=infrastructure_changed::$HasDiff"
-          Write-Host "{infrastructure_changed}={$HasDiff" >> $GITHUB_OUTPUT
+          Write-Host "{infrastructure_changed}={$HasDiff}" >> $GITHUB_OUTPUT
   Test:
     needs: [Check_Changed_Files]
     if: needs.Check_Changed_Files.outputs.infrastructure_changed == 'True'
