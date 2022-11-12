@@ -1,0 +1,19 @@
+name: Prod Deployment
+
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  Test:
+    uses: ./.github/workflows/reusable_test.yml
+    with:
+      stage: prod
+  Deploy:
+    uses: ./.github/workflows/reusable_workflow.yml
+    with:
+      stage: prod
+    secrets:
+      AWS_ACCESS_KEY_ID: ${{ secrets.PROD_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.PROD_SECRET_ACCESS_KEY }}
